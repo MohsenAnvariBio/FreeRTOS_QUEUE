@@ -31,7 +31,12 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include <string.h>
+#include <stdio.h>
+#include "FreeRTOS.h"
+#include "task.h"
+#include  "queue.h"
+#include "timers.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
@@ -53,7 +58,11 @@ extern "C" {
 void Error_Handler(void);
 
 /* USER CODE BEGIN EFP */
-
+void menu_task(void *param);
+void led_task(void *param);
+void rtc_task(void *param);
+void print_task(void *param);
+void cmd_handler_task(void *param);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/

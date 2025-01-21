@@ -45,7 +45,15 @@ RTC_HandleTypeDef hrtc;
 UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
+xTaskHandle handle_cmd_task;
+xTaskHandle handle_menu_task;
+xTaskHandle handle_print_task;
+xTaskHandle handle_led_task;
+xTaskHandle handle_rtc_task;
 
+
+QueueHandle_t q_data;
+QueueHandle_t q_print;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -69,7 +77,7 @@ static void MX_USART2_UART_Init(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-
+	BaseType_t status;
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -86,6 +94,7 @@ int main(void)
 
   /* USER CODE BEGIN SysInit */
 
+
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
@@ -93,7 +102,35 @@ int main(void)
   MX_RTC_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
+	status = xTaskCreate(menu_task, "menu_task", 250, NULL, 2, &handle_menu_task);
 
+	configASSERT(status == pdPASS);
+
+	status = xTaskCreate(cmd_handler_task, "cmd_task", 250, NULL, 2, &handle_cmd_task);
+
+	configASSERT(status == pdPASS);
+
+	status = xTaskCreate(print_task, "print_task", 250, NULL, 2, &handle_print_task);
+
+	configASSERT(status == pdPASS);
+
+	status = xTaskCreate(led_task, "led_task", 250, NULL, 2, &handle_led_task);
+
+	configASSERT(status == pdPASS);
+
+	status = xTaskCreate(rtc_task, "rtc_task", 250, NULL, 2, &handle_rtc_task);
+
+	configASSERT(status == pdPASS);
+
+	q_data = xQueueCreate (10, sizeof(char));
+
+	configASSERT(q_data != NULL);
+
+	q_print = xQueueCreate (10, sizeof(size_t));
+
+	configASSERT(q_print != NULL);
+
+	vTaskStartScheduler();
   /* USER CODE END 2 */
 
   /* Infinite loop */
