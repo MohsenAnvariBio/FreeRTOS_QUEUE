@@ -29,16 +29,4 @@
 		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
 		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>commen/FreeRTOS</name>
-			<type>2</type>
-			<location>D:/Embedded Word/RTOS/RTOS/commen/ThirdParty/FreeRTOS</location>
-		</link>
-		<link>
-			<name>commen/SEGGER</name>
-			<type>2</type>
-			<location>D:/Embedded Word/RTOS/RTOS/commen/ThirdParty/SEGGER</location>
-		</link>
-	</linkedResources>
 </projectDescription>
