@@ -41,6 +41,18 @@ extern "C" {
 
 /* Exported types ------------------------------------------------------------*/
 /* USER CODE BEGIN ET */
+extern xTaskHandle handle_cmd_task;
+extern xTaskHandle handle_menu_task;
+extern xTaskHandle handle_print_task;
+extern xTaskHandle handle_led_task;
+extern xTaskHandle handle_rtc_task;
+
+
+extern QueueHandle_t q_data;
+extern QueueHandle_t q_print;
+
+extern UART_HandleTypeDef huart2;
+extern RTC_HandleTypeDef hrtc;
 
 /* USER CODE END ET */
 
