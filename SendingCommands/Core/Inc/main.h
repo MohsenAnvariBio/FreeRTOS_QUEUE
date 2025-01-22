@@ -41,6 +41,25 @@ extern "C" {
 
 /* Exported types ------------------------------------------------------------*/
 /* USER CODE BEGIN ET */
+
+typedef struct
+{
+	uint8_t payload[10];
+	uint32_t len;
+}command_t;
+
+/* Application states */
+typedef enum
+{
+	sMainMenu = 0,
+	sLedEffect,
+	sRtcMenu,
+	sRtcTimeConfig,
+	sRtcDateConfig,
+	sRtcReport,
+}state_t;
+
+
 extern xTaskHandle handle_cmd_task;
 extern xTaskHandle handle_menu_task;
 extern xTaskHandle handle_print_task;
@@ -53,6 +72,10 @@ extern QueueHandle_t q_print;
 
 extern UART_HandleTypeDef huart2;
 extern RTC_HandleTypeDef hrtc;
+
+extern state_t curr_state;
+
+
 
 /* USER CODE END ET */
 
